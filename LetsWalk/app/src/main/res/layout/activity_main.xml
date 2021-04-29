@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/myLayout"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnWalk"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:text="Caminhar"
+        android:textSize="24sp"
+        app:backgroundTint="#FF6200EE" />
+
+    <Button
+        android:id="@+id/btnFound"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_below="@+id/btnWalk"
+        android:layout_marginTop="1dp"
+        android:text="Encontrar"
+        android:textSize="24sp"
+        app:backgroundTint="#FF6200EE" />
+
+    <Button
+        android:id="@+id/btnOut"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_below="@+id/btnFound"
+        android:layout_marginTop="1dp"
+        android:text="Chamar um carro"
+        android:textSize="24sp"
+        app:backgroundTint="#FF6200EE" />
+</RelativeLayout>

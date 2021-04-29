@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity3">
+
+    <TextView
+        android:id="@+id/txtMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEnderecoRecebido"
+        android:layout_centerHorizontal="true"
+        android:text="O destino correto é: "
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/txtEnderecoRecebido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnSim"
+        android:layout_width="208dp"
+        android:layout_height="175dp"
+        android:layout_above="@+id/txtMsg"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginBottom="-403dp"
+        android:layout_toEndOf="@+id/btnNao"
+        android:layout_toRightOf="@+id/btnNao"
+        android:text="Sim" />
+
+    <Button
+        android:id="@+id/btnNao"
+        android:layout_width="208dp"
+        android:layout_height="175dp"
+        android:layout_above="@+id/txtMsg"
+        android:layout_marginBottom="-403dp"
+        android:text="Não" />
+</RelativeLayout>

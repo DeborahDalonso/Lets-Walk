@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity2">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnFalar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="114dp"
+        android:text="Para onde nós vamos?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="101dp" />
+
+    <EditText
+        android:id="@+id/edtDestino"
+        android:layout_width="402dp"
+        android:layout_height="94dp"
+        android:layout_below="@+id/btnFalar"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:scrollbarThumbHorizontal="@color/purple_200"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/purple_500" />
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="301dp" />
+
+    <ImageButton
+        android:id="@+id/btnFalar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/microphone"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="198dp"
+        android:contentDescription="@string/accessibility_service_description"
+        android:background="@null"/>
+
+</RelativeLayout>

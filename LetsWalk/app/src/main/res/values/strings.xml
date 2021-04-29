@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LetsWalk</string>
+    <string name="accessibility_service_label">servico acessibilidade</string>
+    <string name="accessibility_service_description">descri</string>
+</resources>
