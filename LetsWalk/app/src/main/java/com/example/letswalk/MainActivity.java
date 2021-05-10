@@ -1,62 +1,49 @@
 package com.example.letswalk;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
-import android.view.InputDevice;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+import java.util.Locale;
 
-    private Button btnToT2;
-    private Button b;
-    private TextToSpeech tts;
-    private RelativeLayout myLayout = null;
-    private float x;
-    private float y;
+public class MainActivity extends AppCompatActivity implements
+        View.OnTouchListener,
+        View.OnLongClickListener,
+        TextToSpeech.OnInitListener {
+
+    private Button btnWalk,btnFound,btnCar = null;
+    private TextToSpeech tts = null;
+    int clickCount = 0;
+    long startTime;
+    long duration;
+    static final int MAX_DURATION = 500;
+    final Locale myLocale = new Locale("pt", "BR");
+    String textBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myLayout = (RelativeLayout) findViewById(R.id.myLayout);
-        b = (Button) findViewById(R.id.btnOut);
+        btnWalk = (Button) findViewById(R.id.btnWalk);
+        btnFound = (Button) findViewById(R.id.btnFound);
+        btnCar = (Button) findViewById(R.id.btnCar);
 
-        myLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                x = event.getX();
-                y = event.getY();
-                if(event.getAction() == MotionEvent.ACTION_MOVE){
-                b.setX(x);
-                b.setY(y);
-                }
-                return true;
-            }
-        });
+        btnWalk.setOnTouchListener(this);
+        btnFound.setOnTouchListener(this);
+        btnCar.setOnTouchListener(this);
+
+        btnWalk.setOnLongClickListener(this);
+        btnFound.setOnLongClickListener(this);
+        btnCar.setOnLongClickListener(this);
 
         tts = new TextToSpeech(this,this);
 
-        btnToT2 = findViewById(R.id.btnWalk);
-
-        btnToT2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
-                openActvity2();
-            }
-        });
     }
 
     public void openActvity2(){
@@ -65,9 +52,67 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     }
 
     @Override
-    public void onInit(int status) {
-            if(status == TextToSpeech.SUCCESS){
+    public boolean onTouch(View v, MotionEvent event) {
+        int action = event.getAction();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                startTime = System.currentTimeMillis();
+                clickCount++;
+                break;
+            case MotionEvent.ACTION_UP:
+                long time = System.currentTimeMillis() - startTime;
+                duration = duration + time;
+                if (clickCount == 2) {
+                    if (duration <= MAX_DURATION) {
+                        Toast.makeText(getApplicationContext(), "double tap", Toast.LENGTH_LONG).show();
+                        String doubletap = "double tap";
+                        tts.speak(doubletap,TextToSpeech.QUEUE_FLUSH,null);
+                    }
+                    clickCount = 0;
+                    duration = 0;
+                }
+                else if(duration > MAX_DURATION){
+                    openActvity2();
+                }
+                break;
 
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnWalk:
+                textBtn = btnWalk.getText().toString();
+                tts.speak(textBtn,TextToSpeech.QUEUE_FLUSH,null);
+                break;
+            case R.id.btnFound:
+                textBtn = btnFound.getText().toString();
+                tts.speak(textBtn,TextToSpeech.QUEUE_FLUSH,null);
+                break;
+            case R.id.btnCar:
+                textBtn = btnCar.getText().toString();
+                tts.speak(textBtn,TextToSpeech.QUEUE_FLUSH,null);
+                break;
+            default:
+                Toast.makeText(getApplicationContext(),"Id not found",Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onInit(int status) {
+        if(status == TextToSpeech.SUCCESS){
+            int result = tts.setLanguage(myLocale);
+            if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
+                Toast.makeText(getApplicationContext(),"Language not supported", Toast.LENGTH_SHORT).show();
             }
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Initialization failed", Toast.LENGTH_SHORT).show();
+        }
     }
 }

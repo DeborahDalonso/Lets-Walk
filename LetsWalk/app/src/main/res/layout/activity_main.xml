@@ -27,7 +27,7 @@
         app:backgroundTint="#FF6200EE" />
 
     <Button
-        android:id="@+id/btnOut"
+        android:id="@+id/btnCar"
         android:layout_width="match_parent"
         android:layout_height="225dp"
         android:layout_below="@+id/btnFound"
