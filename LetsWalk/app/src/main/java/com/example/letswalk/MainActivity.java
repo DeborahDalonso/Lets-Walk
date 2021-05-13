@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements
                         Toast.makeText(getApplicationContext(), "double tap", Toast.LENGTH_LONG).show();
                         String doubletap = "double tap";
                         tts.speak(doubletap,TextToSpeech.QUEUE_FLUSH,null);
+                        openActvity2();
                     }
                     clickCount = 0;
                     duration = 0;
