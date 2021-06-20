@@ -140,7 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 gotoLocation(address.getLatitude(),address.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(),address.getLongitude())));
                 destino = encontrarPontos(address.getLatitude(),address.getLongitude());
-                uau = destino.getExtras();
+                uau = destino.getFeatureName();
                 Toast.makeText(getApplicationContext(), uau, Toast.LENGTH_LONG).show();
             }
 
