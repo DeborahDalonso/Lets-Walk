@@ -36,6 +36,7 @@ public class Activity2 extends AppCompatActivity implements View.OnKeyListener, 
         txtEnderecoToAct3 = (TextView) findViewById(R.id.txtEnderecoRecebido);
 
         btnFalar.setOnClickListener(this);
+        btnOk.setOnClickListener(this);
         edtDestino.setOnKeyListener(this);
         btnFalar.setOnClickListener(this);
     }
@@ -74,8 +75,6 @@ public class Activity2 extends AppCompatActivity implements View.OnKeyListener, 
                 openActvity3();
             break;
         }
-
-
     }
 
     @Override

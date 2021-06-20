@@ -99,8 +99,7 @@ public class Activity3 extends AppCompatActivity implements
                 startActivity(tela2);
                 break;
             case R.id.btnSim:
-                Intent map = new Intent(this, MapsActivity.class);
-                startActivity(map);
+                openMaps();
                 break;
         }
     }

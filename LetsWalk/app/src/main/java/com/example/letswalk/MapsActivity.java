@@ -66,7 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(bundle.containsKey("ENDERECO"))
         {
             mSearchAddresss = bundle.getString("ENDERECO");
-            Toast.makeText(getApplicationContext(), mSearchAddresss, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), mSearchAddresss, Toast.LENGTH_LONG).show();
 
         }
 
@@ -93,6 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .build();
             mGoogleApiClient.connect();
             geoLocate();
+
 
         }
         else {
@@ -130,15 +131,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void geoLocate(){
 
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
+        String uau;
         try {
-            List<Address> addressList = geocoder.getFromLocationName(mSearchAddresss,1 );
+            List<Address> addressList = geocoder.getFromLocationName(mSearchAddresss,2);
 
             if(addressList.size()>0){
                 Address address = addressList.get(0);
-
                 gotoLocation(address.getLatitude(),address.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(),address.getLongitude())));
+                destino = encontrarPontos(address.getLatitude(),address.getLongitude());
+                uau = destino.getExtras();
+                Toast.makeText(getApplicationContext(), uau, Toast.LENGTH_LONG).show();
             }
 
         } catch (IOException e) {
@@ -163,6 +166,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         drawRoute();
     }
 
+    public Address encontrarPontos (double lat,double lng) throws IOException {
+        Address address = null;
+        Geocoder geocoder = new Geocoder(getApplicationContext());
+        List<Address> pontos = geocoder.getFromLocation(lat,lng,1);
+
+        for(int i = 0; pontos.size()>i; i++){
+            address = pontos.get(i);
+        }
+        return address;
+    }
 
     public void drawRoute(){
         PolylineOptions po;
