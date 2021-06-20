@@ -16,32 +16,47 @@ import java.util.Locale;
 
 public class Activity3 extends AppCompatActivity implements
         TextToSpeech.OnInitListener,
-        View.OnTouchListener,
+        View.OnClickListener,
         View.OnLongClickListener {
 
     private Button btnN, btnS = null;
     private TextToSpeech tts = null;
     final Locale myLocale = new Locale("pt", "BR");
     String textBtn;
-
+    TextView adress;
     int clickCount = 0;
     long startTime;
     long duration;
     static final int MAX_DURATION = 500;
+    String d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
 
+        adress = (TextView) findViewById(R.id.txtEnderecoRecebido);
+
+        Bundle bundle = getIntent().getExtras();
+
         btnN = (Button) findViewById(R.id.btnNao);
         btnS = (Button) findViewById(R.id.btnSim);
+
+        btnS.setOnClickListener(this);
 
         btnN.setOnLongClickListener(this);
         btnS.setOnLongClickListener(this);
 
+        if(bundle.containsKey("ENDERECO"))
+        {
+            String dados = bundle.getString("ENDERECO");
+            d = dados;
+            adress.setText(""+dados);
         }
 
+        }
+
+        /*
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -59,6 +74,7 @@ public class Activity3 extends AppCompatActivity implements
                         Toast.makeText(getApplicationContext(), "double tap", Toast.LENGTH_LONG).show();
                         String doubletap = "double tap";
                         tts.speak(doubletap,TextToSpeech.QUEUE_FLUSH,null);
+                        openMaps();
                     }
                     clickCount = 0;
                     duration = 0;
@@ -72,6 +88,8 @@ public class Activity3 extends AppCompatActivity implements
         }
         return false;
     }
+*/
+
 
     @Override
     public boolean onLongClick(View v) {
@@ -102,5 +120,16 @@ public class Activity3 extends AppCompatActivity implements
         else{
             Toast.makeText(getApplicationContext(),"Initialization failed", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void openMaps(){
+        Intent tela4 = new Intent(this, MapsActivity.class);
+        tela4.putExtra("ENDERECO", d);
+        startActivity(tela4);
+    }
+
+    @Override
+    public void onClick(View v) {
+        openMaps();
     }
 }
