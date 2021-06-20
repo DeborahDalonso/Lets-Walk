@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".Activity3">
 
     <TextView
@@ -13,16 +13,22 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/txtEnderecoRecebido"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="234dp"
         android:text="O destino correto é: "
         android:textColor="#FFFFFF"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSim"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/txtEnderecoRecebido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:text=""
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
@@ -32,18 +38,25 @@
         android:layout_width="208dp"
         android:layout_height="175dp"
         android:layout_above="@+id/txtMsg"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginBottom="-403dp"
+        android:layout_marginStart="203dp"
+        android:layout_marginLeft="203dp"
         android:layout_toEndOf="@+id/btnNao"
         android:layout_toRightOf="@+id/btnNao"
-        android:text="Sim" />
+        android:text="Sim"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btnNao"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.807" />
 
     <Button
         android:id="@+id/btnNao"
         android:layout_width="208dp"
         android:layout_height="175dp"
         android:layout_above="@+id/txtMsg"
-        android:layout_marginBottom="-403dp"
-        android:text="Não" />
-</RelativeLayout>
+        android:text="Não"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.807" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +25,6 @@ public class Activity3 extends AppCompatActivity implements
     final Locale myLocale = new Locale("pt", "BR");
     String textBtn;
     TextView adress;
-    int clickCount = 0;
-    long startTime;
-    long duration;
-    static final int MAX_DURATION = 500;
     String d;
 
     @Override
@@ -43,6 +40,7 @@ public class Activity3 extends AppCompatActivity implements
         btnS = (Button) findViewById(R.id.btnSim);
 
         btnS.setOnClickListener(this);
+        btnN.setOnClickListener(this);
 
         btnN.setOnLongClickListener(this);
         btnS.setOnLongClickListener(this);
@@ -55,41 +53,6 @@ public class Activity3 extends AppCompatActivity implements
         }
 
         }
-
-        /*
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        int action = event.getAction();
-        switch (action) {
-            case MotionEvent.ACTION_DOWN:
-                startTime = System.currentTimeMillis();
-                clickCount++;
-                break;
-            case MotionEvent.ACTION_UP:
-                long time = System.currentTimeMillis() - startTime;
-                duration = duration + time;
-                if (clickCount == 2) {
-                    if (duration <= MAX_DURATION) {
-                        Toast.makeText(getApplicationContext(), "double tap", Toast.LENGTH_LONG).show();
-                        String doubletap = "double tap";
-                        tts.speak(doubletap,TextToSpeech.QUEUE_FLUSH,null);
-                        openMaps();
-                    }
-                    clickCount = 0;
-                    duration = 0;
-                }
-                else if(duration > MAX_DURATION){
-                    String doubletap = "Max duration";
-                    tts.speak(doubletap,TextToSpeech.QUEUE_FLUSH,null);
-                }
-                break;
-
-        }
-        return false;
-    }
-*/
-
 
     @Override
     public boolean onLongClick(View v) {
@@ -130,6 +93,15 @@ public class Activity3 extends AppCompatActivity implements
 
     @Override
     public void onClick(View v) {
-        openMaps();
+        switch(v.getId()){
+            case R.id.btnNao:
+                Intent tela2 = new Intent(this, Activity2.class);
+                startActivity(tela2);
+                break;
+            case R.id.btnSim:
+                Intent map = new Intent(this, MapsActivity.class);
+                startActivity(map);
+                break;
+        }
     }
 }

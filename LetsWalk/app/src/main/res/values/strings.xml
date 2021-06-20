@@ -6,4 +6,6 @@
     <string name="encontrar">Encontrar</string>
     <string name="chamar">Chamar</string>
     <string name="title_activity_maps">Map</string>
+    <string name="informe_o_endereco">Digite o endereço, coloque a cidade</string>
+    <string name="Aperte_e_fale_o_endereco">Botão para falar o endereço, diga o nome da cidade também</string>
 </resources>

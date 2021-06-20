@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/black"
@@ -13,37 +13,58 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnFalar"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="114dp"
         android:text="Para onde nós vamos?"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/white"
         android:textSize="30sp"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="101dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btnFalar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edtDestino"
         android:layout_width="402dp"
         android:layout_height="94dp"
         android:layout_below="@+id/btnFalar"
+        android:backgroundTint="@color/purple_500"
         android:ems="10"
+        android:hint="@string/informe_o_endereco"
         android:inputType="textPersonName"
         android:scrollbarThumbHorizontal="@color/purple_200"
         android:text=""
         android:textColor="#FFFFFF"
-        android:backgroundTint="@color/purple_500" />
-        tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="301dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.773" />
 
     <ImageButton
         android:id="@+id/btnFalar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:contentDescription="@string/Aperte_e_fale_o_endereco"
+        android:layout_width="89dp"
+        android:layout_height="86dp"
         android:layout_centerInParent="true"
-        app:srcCompat="@drawable/microphone"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="198dp"
-        android:contentDescription="@string/accessibility_service_description"
-        android:background="@null"/>
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/edtDestino"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.712"
+        app:srcCompat="@drawable/microphone" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnOK"
+        android:layout_width="match_parent"
+        android:layout_height="121dp"
+        android:layout_marginTop="7dp"
+        android:textSize="24sp"
+        android:text="Ok"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtDestino" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

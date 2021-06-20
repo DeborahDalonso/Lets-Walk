@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,16 +11,12 @@ import android.widget.Toast;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements
-        View.OnTouchListener,
+        View.OnClickListener,
         View.OnLongClickListener,
         TextToSpeech.OnInitListener {
 
     private Button btnWalk,btnFound,btnCar = null;
     private TextToSpeech tts = null;
-    int clickCount = 0;
-    long startTime;
-    long duration;
-    static final int MAX_DURATION = 500;
     final Locale myLocale = new Locale("pt", "BR");
     String textBtn;
 
@@ -34,9 +29,9 @@ public class MainActivity extends AppCompatActivity implements
         btnFound = (Button) findViewById(R.id.btnFound);
         btnCar = (Button) findViewById(R.id.btnCar);
 
-        btnWalk.setOnTouchListener(this);
-        btnFound.setOnTouchListener(this);
-        btnCar.setOnTouchListener(this);
+        btnWalk.setOnClickListener(this);
+        btnFound.setOnClickListener(this);
+        btnCar.setOnClickListener(this);
 
         btnWalk.setOnLongClickListener(this);
         btnFound.setOnLongClickListener(this);
@@ -44,41 +39,6 @@ public class MainActivity extends AppCompatActivity implements
 
         tts = new TextToSpeech(this,this);
 
-    }
-
-    public void openActvity2(){
-        Intent tela2 = new Intent(this, Activity2.class);
-        startActivity(tela2);
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        int action = event.getAction();
-        switch (action) {
-            case MotionEvent.ACTION_DOWN:
-                startTime = System.currentTimeMillis();
-                clickCount++;
-                break;
-            case MotionEvent.ACTION_UP:
-                long time = System.currentTimeMillis() - startTime;
-                duration = duration + time;
-                if (clickCount == 2) {
-                    if (duration <= MAX_DURATION) {
-                        Toast.makeText(getApplicationContext(), "double tap", Toast.LENGTH_LONG).show();
-                        String doubletap = "double tap";
-                        tts.speak(doubletap,TextToSpeech.QUEUE_FLUSH,null);
-                        openActvity2();
-                    }
-                    clickCount = 0;
-                    duration = 0;
-                }
-                else if(duration > MAX_DURATION){
-                    openActvity2();
-                }
-                break;
-
-        }
-        return false;
     }
 
     @Override
@@ -119,4 +79,19 @@ public class MainActivity extends AppCompatActivity implements
             Toast.makeText(getApplicationContext(),"Initialization failed", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.btnWalk:
+                Intent tela2 = new Intent(this, Activity2.class);
+                startActivity(tela2);
+                break;
+            case R.id.btnFound:
+                Intent tela4 = new Intent(this, Activity4.class);
+                startActivity(tela4);
+                break;
+        }
+    }
+
 }
