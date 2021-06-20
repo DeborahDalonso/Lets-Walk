@@ -2,4 +2,8 @@
     <string name="app_name">LetsWalk</string>
     <string name="accessibility_service_label">servico acessibilidade</string>
     <string name="accessibility_service_description">descri</string>
+    <string name="caminhar">Caminhar</string>
+    <string name="encontrar">Encontrar</string>
+    <string name="chamar">Chamar</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

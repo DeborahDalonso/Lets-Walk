@@ -87,14 +87,17 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.btnWalk:
                 textBtn = btnWalk.getText().toString();
                 tts.speak(textBtn,TextToSpeech.QUEUE_FLUSH,null);
+
                 break;
             case R.id.btnFound:
                 textBtn = btnFound.getText().toString();
                 tts.speak(textBtn,TextToSpeech.QUEUE_FLUSH,null);
+
                 break;
             case R.id.btnCar:
                 textBtn = btnCar.getText().toString();
                 tts.speak(textBtn,TextToSpeech.QUEUE_FLUSH,null);
+
                 break;
             default:
                 Toast.makeText(getApplicationContext(),"Id not found",Toast.LENGTH_SHORT).show();

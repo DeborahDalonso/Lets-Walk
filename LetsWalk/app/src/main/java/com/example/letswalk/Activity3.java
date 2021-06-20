@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,55 +15,80 @@ import android.widget.Toast;
 import java.util.Locale;
 
 public class Activity3 extends AppCompatActivity implements
-        View.OnClickListener,
         TextToSpeech.OnInitListener,
+        View.OnTouchListener,
         View.OnLongClickListener {
 
-    TextView adress;
-    private Button btnN, btnS;
+    private Button btnN, btnS = null;
     private TextToSpeech tts = null;
     final Locale myLocale = new Locale("pt", "BR");
-    String txtBtn;
+    String textBtn;
+
+    int clickCount = 0;
+    long startTime;
+    long duration;
+    static final int MAX_DURATION = 500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
 
-        adress = (TextView) findViewById(R.id.txtEnderecoRecebido);
         btnN = (Button) findViewById(R.id.btnNao);
         btnS = (Button) findViewById(R.id.btnSim);
 
-        btnN.setOnClickListener(this);
         btnN.setOnLongClickListener(this);
-
-        Bundle bundle = getIntent().getExtras();
-
-        if(bundle.containsKey("ENDERECO"))
-        {
-            String dados = bundle.getString("ENDERECO");
-            adress.setText(""+dados);
-        }
+        btnS.setOnLongClickListener(this);
 
         }
+
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId())
-        {
+    public boolean onTouch(View v, MotionEvent event) {
+        int action = event.getAction();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                startTime = System.currentTimeMillis();
+                clickCount++;
+                break;
+            case MotionEvent.ACTION_UP:
+                long time = System.currentTimeMillis() - startTime;
+                duration = duration + time;
+                if (clickCount == 2) {
+                    if (duration <= MAX_DURATION) {
+                        Toast.makeText(getApplicationContext(), "double tap", Toast.LENGTH_LONG).show();
+                        String doubletap = "double tap";
+                        tts.speak(doubletap,TextToSpeech.QUEUE_FLUSH,null);
+                    }
+                    clickCount = 0;
+                    duration = 0;
+                }
+                else if(duration > MAX_DURATION){
+                    String doubletap = "Max duration";
+                    tts.speak(doubletap,TextToSpeech.QUEUE_FLUSH,null);
+                }
+                break;
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        switch (v.getId()){
             case R.id.btnNao:
-                Toast.makeText(getApplicationContext(),"Não",Toast.LENGTH_SHORT).show();
-                Intent tela2 = new Intent(this, Activity2.class);
-                startActivity(tela2);
+                textBtn = btnN.getText().toString();
+                tts.speak(textBtn,TextToSpeech.QUEUE_FLUSH,null);
                 break;
             case R.id.btnSim:
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("google.navigation:q=sao+paulo"));
+                textBtn = btnS.getText().toString();
+                tts.speak(textBtn,TextToSpeech.QUEUE_FLUSH,null);
                 break;
             default:
                 Toast.makeText(getApplicationContext(),"Id not found",Toast.LENGTH_SHORT).show();
                 break;
         }
+        return true;
     }
 
     @Override
@@ -76,23 +102,5 @@ public class Activity3 extends AppCompatActivity implements
         else{
             Toast.makeText(getApplicationContext(),"Initialization failed", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public boolean onLongClick(View v) {
-        switch (v.getId()){
-            case R.id.btnNao:
-                txtBtn = btnN.getText().toString();
-                tts.speak(txtBtn,TextToSpeech.QUEUE_FLUSH,null);
-                break;
-            case R.id.btnSim:
-                txtBtn = btnS.getText().toString();
-                tts.speak(txtBtn,TextToSpeech.QUEUE_FLUSH,null);
-                break;
-            default:
-                Toast.makeText(getApplicationContext(),"Id not found",Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return true;
     }
 }
