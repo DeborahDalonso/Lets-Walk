@@ -4,9 +4,12 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -16,6 +19,7 @@ import com.example.letswalk.databinding.ActivityMapsBinding;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -26,7 +30,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -37,8 +44,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Polyline polyline;
     private Marker marker;
     private List<LatLng> list;
-    String destino;
+    private Address destino;
+    String mSearchAddresss;
+    private LatLng l;
 
+    public static final int DEFAULT_ZOOM = 15;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +65,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if(bundle.containsKey("ENDERECO"))
         {
-            destino = bundle.getString("ENDERECO");
-            Toast.makeText(getApplicationContext(), destino, Toast.LENGTH_LONG).show();
+            mSearchAddresss = bundle.getString("ENDERECO");
+            Toast.makeText(getApplicationContext(), mSearchAddresss, Toast.LENGTH_LONG).show();
 
         }
 
@@ -82,6 +92,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .addApi(LocationServices.API)
                     .build();
             mGoogleApiClient.connect();
+            geoLocate();
+
         }
         else {
             LatLng sydney = new LatLng(-34, 151);
@@ -115,23 +127,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    private void geoLocate(){
 
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            List<Address> addressList = geocoder.getFromLocationName(mSearchAddresss,1 );
+
+            if(addressList.size()>0){
+                Address address = addressList.get(0);
+
+                gotoLocation(address.getLatitude(),address.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(),address.getLongitude())));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void gotoLocation(double lat,double lng){
+
+        LatLng latLng = new LatLng(lat,lng);
+        l = latLng;
+        list = new ArrayList<LatLng>();
+
+        CameraUpdate cameraUpdate= CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM);
+
+        mMap.moveCamera(cameraUpdate);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.addMarker(new MarkerOptions().position(latLng).title("Destino"));
+
+        list.add(latLng);
+        drawRoute();
+    }
 
 
     public void drawRoute(){
         PolylineOptions po;
-
-        if (polyline == null){
-            po = new PolylineOptions();
-
-            for(int i =0, tam = list.size(); i < tam; i++){
-                po.add(list.get(i));
-            }
-            po.color(Color.BLACK);
-            polyline = mMap.addPolyline(po);
-        }
-        else {
-            polyline.setPoints(list);
+        po = new PolylineOptions();
+        po.add(l);
+        polyline = mMap.addPolyline(po);
         }
     }
-}
