@@ -1,4 +1,4 @@
-package com.example.letswalk;
+package com.example.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,15 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Activity4 extends AppCompatActivity implements View.OnClickListener {
+public class Opcoes_prontas extends AppCompatActivity implements View.OnClickListener {
 
     private Button policia, farmacia, hospital, mercado, cinema, restaurante;
     String btntxt;
+    String pc = " Poços de Caldas";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_4);
+        setContentView(R.layout.opcoes_prontas);
 
         policia = (Button) findViewById(R.id.btnPolicia);
         farmacia = (Button) findViewById(R.id.btnFarmarcia);
@@ -37,28 +38,34 @@ public class Activity4 extends AppCompatActivity implements View.OnClickListener
         switch (v.getId()){
             case R.id.btnPolicia:
                 btntxt = policia.getText().toString();
+                listMaps();
             break;
             case R.id.btnFarmarcia:
                 btntxt = farmacia.getText().toString();
+                listMaps();
             break;
             case R.id.btnHospital:
                 btntxt = hospital.getText().toString();
+                listMaps();
             break;
             case R.id.btnCinema:
                 btntxt = cinema.getText().toString();
+                listMaps();
             break;
             case R.id.btnRestaurante:
                 btntxt = restaurante.getText().toString();
+                listMaps();
             break;
             case R.id.btnMercado:
                 btntxt = mercado.getText().toString();
+                listMaps();
             break;
         }
     }
 
-    public void listaMap(){
-        Intent list = new Intent(this, Activity3.class);
-        list.putExtra("ENDERECO", btntxt);
+    public void listMaps(){
+        Intent list = new Intent(this, ListaMaps.class);
+        list.putExtra("LOCAL", btntxt+pc);
         startActivity(list);
     }
 }

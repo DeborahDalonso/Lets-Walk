@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Activity3">
+    tools:context=".Confirmacao_destinho">
 
     <TextView
         android:id="@+id/txtMsg"
@@ -14,7 +14,7 @@
         android:layout_above="@+id/txtEnderecoRecebido"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="234dp"
-        android:text="O destino correto é: "
+        android:text="Este é o destino correto? "
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/btnSim"
@@ -50,6 +50,8 @@
         android:layout_toEndOf="@+id/btnNao"
         android:layout_toRightOf="@+id/btnNao"
         android:text="Sim"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#FF6200EE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/btnNao"
@@ -62,6 +64,8 @@
         android:layout_height="175dp"
         android:layout_above="@+id/txtMsg"
         android:text="Não"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#FF6200EE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

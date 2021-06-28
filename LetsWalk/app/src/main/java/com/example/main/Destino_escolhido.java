@@ -1,4 +1,4 @@
-package com.example.letswalk;
+package com.example.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.Locale;
 
-public class Activity2 extends AppCompatActivity implements View.OnKeyListener, View.OnClickListener {
+public class Destino_escolhido extends AppCompatActivity implements View.OnKeyListener, View.OnClickListener {
 
     EditText edtDestino;
     private ImageButton btnFalar;
@@ -28,7 +28,7 @@ public class Activity2 extends AppCompatActivity implements View.OnKeyListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_2);
+        setContentView(R.layout.destino_escolhido);
 
         edtDestino = (EditText) findViewById(R.id.edtDestino);
         btnFalar = (ImageButton) findViewById(R.id.btnFalar);
@@ -54,7 +54,7 @@ public class Activity2 extends AppCompatActivity implements View.OnKeyListener, 
         super.onActivityResult(requestCode, resultCode, dados);
     }
     public void openActvity3(){
-        Intent tela3 = new Intent(this, Activity3.class);
+        Intent tela3 = new Intent(this, Confirmacao_destinho.class);
         tela3.putExtra("ENDERECO", edtDestino.getText().toString());
         startActivity(tela3);
     }

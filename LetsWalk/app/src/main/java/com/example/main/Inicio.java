@@ -1,4 +1,4 @@
-package com.example.letswalk;
+package com.example.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,7 @@ public class Inicio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inicio);
+        setContentView(R.layout.inicio);
 
         new Handler().postDelayed(new Runnable() {
             @Override

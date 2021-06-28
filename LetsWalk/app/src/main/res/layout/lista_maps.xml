@@ -5,15 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FF6200EE"
-    tools:context=".Activity4">
+    tools:context=".ListaMaps">
 
     <Button
-        android:id="@+id/btnPolicia"
+        android:id="@+id/btnOpc"
         android:layout_width="match_parent"
-        android:layout_height="122dp"
-        android:text="Policia"
+        android:layout_height="144dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="16dp"
+        android:text=""
         android:textSize="24sp"
         app:backgroundTint="#FF6200EE"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -22,73 +25,72 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btnFarmarcia"
+        android:id="@+id/btnOpc1"
         android:layout_width="match_parent"
-        android:layout_height="122dp"
-        android:layout_below="@+id/btnHospital"
-        android:text="Farmácia"
+        android:layout_height="144dp"
+        android:layout_below="@+id/btnOpc"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="16dp"
+        android:text=""
         android:textSize="24sp"
         app:backgroundTint="#FF6200EE"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.245" />
+
+    <Button
+        android:id="@+id/btnOpc2"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:layout_below="@+id/btnOpc1"
+        android:layout_marginTop="88dp"
+        android:text=""
+        android:textSize="24sp"
+        app:backgroundTint="#FF6200EE"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPolicia"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.41" />
 
     <Button
-        android:id="@+id/btnHospital"
+        android:id="@+id/btnOpc3"
         android:layout_width="match_parent"
-        android:layout_height="122dp"
-        android:text="Hospital"
+        android:layout_height="144dp"
+        android:layout_below="@+id/btnOpc2"
+        android:layout_marginBottom="16dp"
+        android:text=""
         android:textSize="24sp"
         app:backgroundTint="#FF6200EE"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFarmarcia"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.765" />
 
     <Button
-        android:id="@+id/btnCinema"
+        android:id="@+id/btnOpc4"
         android:layout_width="match_parent"
-        android:layout_height="122dp"
-        android:text="Cinema"
+        android:layout_height="144dp"
+        android:layout_below="@+id/btnOpc3"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="0dp"
+        android:text=""
         android:textSize="24sp"
         app:backgroundTint="#FF6200EE"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnHospital"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btnRestaurante"
-        android:layout_width="match_parent"
-        android:layout_height="122dp"
-        android:text="Restaurante"
-        android:textSize="24sp"
-        app:backgroundTint="#FF6200EE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCinema"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btnMercado"
-        android:layout_width="match_parent"
-        android:layout_height="122dp"
-        android:layout_below="@+id/btnFarmarcia"
-        android:text="Mercado"
-        android:textSize="24sp"
-        app:backgroundTint="#FF6200EE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRestaurante" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
